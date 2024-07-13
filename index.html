@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refer & Earn</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Refer & Earn</h1>
+      <p>Earn rewards by referring friends and family!</p>
+      <button class="btn btn-large btn-primary" id="refer-now-btn">Refer Now</button>
+    </div>
+  </section>
+
+  <!-- Popup Modal -->
+  <div id="refer-modal" class="modal">
+    <div class="modal-content">
+      <h2>Refer a Friend</h2>
+      <form id="refer-form">
+        <!-- Referrer Details -->
+        <h3>Your Details</h3>
+        <div class="input-field">
+          <input type="text" id="referrer-name" required>
+          <label for="referrer-name">Name:</label>
+        </div>
+        <div class="input-field">
+          <input type="email" id="referrer-email" required>
+          <label for="referrer-email">Email:</label>
+        </div>
+        <div class="input-field">
+          <input type="tel" id="referrer-phone" required>
+          <label for="referrer-phone">Phone:</label>
+        </div>
+
+        <!-- Referee Details -->
+        <h3>Friend's Details</h3>
+        <div class="input-field">
+          <input type="text" id="referee-name" required>
+          <label for="referee-name">Name:</label>
+        </div>
+        <div class="input-field">
+          <input type="email" id="referee-email" required>
+          <label for="referee-email">Email:</label>
+        </div>
+        <div class="input-field">
+          <input type="tel" id="referee-phone" required>
+          <label for="referee-phone">Phone:</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // Initialize modal
+    document.addEventListener('DOMContentLoaded', function() {
+      var modal = document.getElementById('refer-modal');
+      M.Modal.init(modal, {});
+    });
+
+    // Open modal on button click
+    document.getElementById('refer-now-btn').addEventListener('click', function() {
+      var modal = document.getElementById('refer-modal');
+      M.Modal.getInstance(modal).open();
+    });
+
+    // Form validation
+    document.getElementById('refer-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var referrerName = document.getElementById('referrer-name').value;
+      var referrerEmail = document.getElementById('referrer-email').value;
+      var referrerPhone = document.getElementById('referrer-phone').value;
+      var refereeName = document.getElementById('referee-name').value;
+      var refereeEmail = document.getElementById('referee-email').value;
+      var refereePhone = document.getElementById('referee-phone').value;
+
+      // Validate email formats
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(referrerEmail) || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(refereeEmail)) {
+        alert('Invalid email format');
+        return;
+      }
+
+      // Validate phone number formats
+      if (!/^\d{10}$/.test(referrerPhone) || !/^\d{10}$/.test(refereePhone)) {
+        alert('Invalid phone number format');
+        return;
+      }
+
+      // If all fields are valid, submit the form
+      this.submit();
+    });
+  </script>
+</body>
+</html>
